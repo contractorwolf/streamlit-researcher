@@ -21,7 +21,8 @@ import asyncio
 # includes SearchManager
 from pagemanager import PageManager
 
-os.system('playwright install')
+os.system('sudo playwright install')
+os.system('sudo playwright install-deps')
 
 TOP_MATCHES = 5
 GPT_MODEL = 'gpt-4-1106-preview' # 'gpt-3.5-turbo'# Defining the model to be used with OpenAI
