@@ -3,6 +3,8 @@
 # pip install langchain langchain-community langchain-openai langchain-core pydantic==1.10.2 docarray==0.32.1
 # conda create -n streamlit python=3.11.4
 
+import os
+
 # Importing necessary modules and classes
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
@@ -11,7 +13,6 @@ from langchain_core.runnables import RunnableParallel, RunnablePassthrough
 from langchain.prompts import ChatPromptTemplate
 from langchain_openai.chat_models import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
-import os
 import logging
 import datetime
 import streamlit as st
@@ -19,6 +20,8 @@ import asyncio
 
 # includes SearchManager
 from pagemanager import PageManager
+
+os.system('playwright install')
 
 TOP_MATCHES = 5
 GPT_MODEL = 'gpt-4-1106-preview' # 'gpt-3.5-turbo'# Defining the model to be used with OpenAI
