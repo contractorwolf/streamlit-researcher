@@ -25,7 +25,7 @@ class PageManager:
                 
                 st.session_state['search_logs'].append(f"found: {links}")
                 
-                print("Reasearching using the following links:")
+                print("Researching using the following links:")
                 
                 st.session_state['search_logs'].append("Reasearching using the following links:")
                 
