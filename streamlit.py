@@ -29,7 +29,18 @@ GPT_MODEL = 'gpt-4-1106-preview' # 'gpt-3.5-turbo'# Defining the model to be use
 TEXT_CHUNK_SIZE = 1000
 TEXT_CHUNK_OVERLAP = 100
 
-API_KEY = st.sidebar.text_input("Enter your API key", key="api_key")
+st.sidebar.markdown("""
+An OpenAI API key is required to make the client-sided call to the LLM.  A ChatGPT Plus account is required for this service.",   
+""")
+
+
+API_KEY = st.sidebar.text_input("API key: ", key="api_key")
+
+st.sidebar.markdown("""
+If you have a ChatGPT Plus account, you can get one of your api keys from here:                 
+https://platform.openai.com/api-keys    
+""")
+
 
 # Setting the OpenAI API key environment variable
 if API_KEY:
