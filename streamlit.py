@@ -30,7 +30,7 @@ TEXT_CHUNK_SIZE = 1000
 TEXT_CHUNK_OVERLAP = 100
 
 st.sidebar.markdown("""
-An OpenAI API key is required to make the client-sided call to the LLM.  A ChatGPT Plus account is required for this service.",   
+An OpenAI API key is required to make the client-sided call to the LLM.  A ChatGPT Plus account is required for this service.   
 """)
 
 
