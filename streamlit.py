@@ -78,7 +78,7 @@ template = """
     {context}
 """
 
-st.title("Google Research Assistant")
+st.title("Real-time Google Research Assistant")
 st.subheader("built by contractorwolf")
 st.markdown("""
     This app takes a question from the user and will do a google search query on that question.  Its then scrapes the 
