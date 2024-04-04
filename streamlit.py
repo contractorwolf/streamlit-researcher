@@ -85,7 +85,7 @@ st.markdown("""
     first 10 pages from the search then scrapes the content from each of the pages.  That content is loaded in a vector
     db (in memory) and the question is posed to the vector db to find the top 5 most relevant snippets.  Those snippets 
     are sent to the OpenAI GPT-4 model to generate a response to the initial research question before displaying the 
-    responsec to the user.  
+    response to the user.  
     
     Make sure you wait at least 30 seconds for the scraping and processing to complete.
 """)
