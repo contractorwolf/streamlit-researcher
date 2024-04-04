@@ -81,11 +81,13 @@ template = """
 st.title("Real-time Google Research Assistant")
 st.subheader("built by contractorwolf")
 st.markdown("""
-    This app takes a question from the user and will do a google search query on that question.  Its then scrapes the 
-    first 10 pages from the search and scrapes the content from each of the pages.  That content is loaded in a vector
-    db in memory and the question is posed to the vector db to find the top 5 most relevant snippets.  Those snippets 
-    are then sent to the OpenAI GPT-4 model to generate a response to the question.  The response is then displayed 
-    to the user.  Make sure you wait at least 30 seconds for the scraping and processing to complete.
+    This application takes a question from the user and does a google search query on that question.  Its then scrapes the 
+    first 10 pages from the search then scrapes the content from each of the pages.  That content is loaded in a vector
+    db (in memory) and the question is posed to the vector db to find the top 5 most relevant snippets.  Those snippets 
+    are sent to the OpenAI GPT-4 model to generate a response to the initial research question before displaying the 
+    responsec to the user.  
+    
+    Make sure you wait at least 30 seconds for the scraping and processing to complete.
 """)
 
 if 'search_logs' not in st.session_state:
