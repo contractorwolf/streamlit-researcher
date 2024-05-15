@@ -1,7 +1,11 @@
+# streamlit run streamlit.py
 
 # pip install pydantic==1.8.2
 # pip install langchain langchain-community langchain-openai langchain-core pydantic==1.10.2 docarray==0.32.1
 # conda create -n streamlit python=3.11.4
+
+# needs: pip install playwright
+# then: playwright install
 
 import os
 
@@ -17,15 +21,32 @@ import logging
 import datetime
 import streamlit as st
 import asyncio
-
+import subprocess
 # includes SearchManager
 from pagemanager import PageManager
+
+
+def install_playwright():
+    """Function to install Playwright browser dependencies."""
+    if 'playwright_installed' not in st.session_state:
+        # Run installation only if it hasn't been marked as done in the session state
+        subprocess.run(["playwright", "install"], check=True)
+        st.session_state['playwright_installed'] = True
+        st.write("Playwright installed.")
+    else:
+        st.write("Playwright installation already completed.")
+
+# Place this at the start of your app to ensure it runs when the app is first loaded
+install_playwright()
+
 
 os.system('playwright install')
 os.system('playwright install-deps')
 
 TOP_MATCHES = 5
-GPT_MODEL = 'gpt-4-1106-preview' # 'gpt-3.5-turbo'# Defining the model to be used with OpenAI
+GPT_MODEL = 'gpt-4o'
+# 'gpt-4-1106-preview' 
+# 'gpt-3.5-turbo'# Defining the model to be used with OpenAI
 TEXT_CHUNK_SIZE = 1000
 TEXT_CHUNK_OVERLAP = 100
 
