@@ -191,8 +191,7 @@ if submitted:
         # trigger_search(query, st)    
         
         loop = asyncio.get_event_loop()
-        task = loop.create_task(trigger_search(query, st))
-        loop.run_until_complete(task)
+        loop.create_task(trigger_search(query, st))
 
 if st.session_state['search_result']:
     st.text_area("Search Results", value=st.session_state['search_result'], height=300)
