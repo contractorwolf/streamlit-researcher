@@ -189,9 +189,15 @@ if submitted:
         st.session_state['search_result'] = ''  # Clear previous result
         # Only proceed if both values are present
         # trigger_search(query, st)    
-        
-        loop = asyncio.get_event_loop()
-        loop.create_task(trigger_search(query, st))
+        # Create a new event loop if there is none
+        try:
+            loop = asyncio.get_event_loop()
+        except RuntimeError:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+
+        # Schedule the task to run in the event loop
+        loop.run_until_complete(trigger_search(query, st))
 
 if st.session_state['search_result']:
     st.text_area("Search Results", value=st.session_state['search_result'], height=300)
