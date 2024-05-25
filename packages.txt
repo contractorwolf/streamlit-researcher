@@ -10,6 +10,5 @@ libsecret-1-dev
 libhyphen-dev
 libmanette-0.2-0
 libflite1
-libflite-dev
 libgles2-mesa-dev
 libx264-dev
