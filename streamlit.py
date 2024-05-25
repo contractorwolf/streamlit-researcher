@@ -39,9 +39,9 @@ def install_playwright():
 # Place this at the start of your app to ensure it runs when the app is first loaded
 install_playwright()
 
-
-os.system('playwright install')
 os.system('playwright install-deps')
+os.system('playwright install')
+
 
 TOP_MATCHES = 5
 GPT_MODEL = 'gpt-4o'
@@ -188,7 +188,11 @@ if submitted:
     if API_KEY and query:
         st.session_state['search_result'] = ''  # Clear previous result
         # Only proceed if both values are present
-        trigger_search(query, st)    
+        # trigger_search(query, st)    
+        
+        loop = asyncio.get_event_loop()
+        task = loop.create_task(trigger_search(query, st))
+        loop.run_until_complete(task)
 
 if st.session_state['search_result']:
     st.text_area("Search Results", value=st.session_state['search_result'], height=300)
