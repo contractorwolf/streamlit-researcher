@@ -55,3 +55,13 @@ libflite_cmu_us_rms.so.1
 libflite_cmu_us_slt.so.1 
 libGLESv2.so.2      
 libx264.so  
+libxslt1-dev
+libwoff2-1.0-2  # You might need to find the correct repository
+libevent-dev
+libopus0
+libharfbuzz-dev
+gstreamer1.0-plugins-base
+libwebp-dev
+libenchant-2-dev
+libsecret-1-dev
+libhyphen-dev
