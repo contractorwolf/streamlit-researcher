@@ -31,7 +31,7 @@ def install_playwright():
     if 'playwright_installed' not in st.session_state:
         # Run installation only if it hasn't been marked as done in the session state
         subprocess.run(["playwright", "install"], check=True)
-        subprocess.run(["playwright", "install-deps"], check=True)
+        # subprocess.run(["playwright", "install-deps"], check=True)
         st.session_state['playwright_installed'] = True
         st.write("Playwright installed.")
     else:
@@ -40,9 +40,8 @@ def install_playwright():
 # Place this at the start of your app to ensure it runs when the app is first loaded
 install_playwright()
 
-# os.system('playwright install-deps')
-# os.system('playwright install')
-
+os.system('playwright install')
+os.system('playwright install-deps')
 
 TOP_MATCHES = 5
 GPT_MODEL = 'gpt-4o'
