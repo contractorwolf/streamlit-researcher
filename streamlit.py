@@ -31,6 +31,7 @@ def install_playwright():
     if 'playwright_installed' not in st.session_state:
         # Run installation only if it hasn't been marked as done in the session state
         subprocess.run(["playwright", "install"], check=True)
+        subprocess.run(["playwright", "install-deps"], check=True)
         st.session_state['playwright_installed'] = True
         st.write("Playwright installed.")
     else:
@@ -39,8 +40,8 @@ def install_playwright():
 # Place this at the start of your app to ensure it runs when the app is first loaded
 install_playwright()
 
-os.system('playwright install-deps')
-os.system('playwright install')
+# os.system('playwright install-deps')
+# os.system('playwright install')
 
 
 TOP_MATCHES = 5
@@ -54,14 +55,12 @@ st.sidebar.markdown("""
 An OpenAI API key is required to make the client-sided call to the LLM.  A ChatGPT Plus account is required for this service.   
 """)
 
-
-API_KEY = st.sidebar.text_input("API key: ", key="api_key")
-
 st.sidebar.markdown("""
 If you have a ChatGPT Plus account, you can get one of your api keys from here:                 
 https://platform.openai.com/api-keys    
 """)
 
+API_KEY = st.sidebar.text_input("API key: ", key="api_key")
 
 # Setting the OpenAI API key environment variable
 if API_KEY:
@@ -162,14 +161,14 @@ async def main_async(question, st):
     return response
 
 # Function to trigger the search and update logs
-def trigger_search(query, st):
+async def trigger_search(query, st):
     st.session_state['search_logs'] = []
     st.session_state['search_result'] = ''
     st.session_state['search_logs'].append("Start searching at: " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     st.session_state['search_logs'].append(f"search: {query}")
     
-    # result = main(query)
-    result = asyncio.run(main_async(query, st))
+    # Await the async result from main_async
+    result = await main_async(query, st)
     
     st.session_state['search_logs'].append("Finished searching at: " + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     st.session_state['search_result'] = result
@@ -187,17 +186,9 @@ if submitted:
         st.warning("Search query is required. Please enter your search query.")
     if API_KEY and query:
         st.session_state['search_result'] = ''  # Clear previous result
-        # Only proceed if both values are present
-        # trigger_search(query, st)    
-        # Create a new event loop if there is none
-        try:
-            loop = asyncio.get_event_loop()
-        except RuntimeError:
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop)
-
-        # Schedule the task to run in the event loop
-        loop.run_until_complete(trigger_search(query, st))
+        
+        # Now run the async function
+        asyncio.run(trigger_search(query, st))
 
 if st.session_state['search_result']:
     st.text_area("Search Results", value=st.session_state['search_result'], height=300)
